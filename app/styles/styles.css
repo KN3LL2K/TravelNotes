@@ -2,6 +2,7 @@ html {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  padding:0;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -10,12 +11,252 @@ html {
 }
 
 body {
-  background-color:#F8F3EE;
-  color:#F8F3EE;
-  font-family: 'Quicksand', sans-serif;
+  padding:0;
+  background-color:#F0F0F0;
+  color:#333;
+  font-family: 'Roboto', sans-serif;
   font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
 }
 
+ul {
+  list-style-type:none;
+  padding:0;
+}
+
+#html-spinner {
+  top:calc(50% - 20px);
+  left:calc(50% - 20px);
+  position: relative;
+  width:40px;
+  height:40px;
+  border:4px solid #B7B7B7;
+  border-top:4px solid #EEEEF1;
+  border-radius:50%;
+
+  -webkit-transition-property: -webkit-transform;
+  -webkit-transition-duration: 1.2s;
+  -webkit-animation-name: rotate;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  
+  -moz-transition-property: -moz-transform;
+  -moz-animation-name: rotate; 
+  -moz-animation-duration: 1.2s; 
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  
+  transition-property: transform;
+  animation-name: rotate; 
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+ 
+@-webkit-keyframes rotate {
+  from {-webkit-transform: rotate(0deg);}
+  to {-webkit-transform: rotate(360deg);}
+}
+ 
+@-moz-keyframes rotate {
+  from {-moz-transform: rotate(0deg);}
+  to {-moz-transform: rotate(360deg);}
+}
+ 
+@keyframes rotate {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
+}
+
+#home {
+  display:flex;
+
+  flex-direction: row;
+  width:100%;
+  height: 100%;
+  position: absolute;
+  top:0;
+  left:0;
+  padding:0;
+  margin:0;
+}
+
+#sidebar {
+  color:#f0f0f0;
+  margin:0;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items:center;
+  flex-grow:0;
+  background-color: #666;
+  height:100vh;
+  left:0;
+  top:0;
+}
+
+.-show {
+  min-width:200px;
+  max-width:200px;
+  transition-duration: 0.3s;
+}
+
+
+.-collapse {
+  min-width:80px !important;
+  max-width:80px;
+  transition-duration: 0.2s;
+  transition-delay: 0.1s; 
+}
+
+.show {
+  opacity: 1;
+  transition-delay: 0.2s;
+  transition-duration:0.2s; 
+}
+
+.hidden {
+  opacity: 0;
+  /*display:none;*/
+  transition-duration: 0.1s;
+}
+
+#title {
+  background-color:#66AFDC;
+  font-size: 22px;
+  width:100%;
+  height:80px;
+  display:flex;
+  justify-content: flex-end;
+  align-items:center;
+}
+#title img {
+  margin-left:10px;
+  margin-right:27px;
+}
+
+#logOut {
+  font-size: 20px;
+  padding:0;
+  display: flex;
+  padding-left:24px;
+  justify-content: flex-end;
+  align-items: center;
+  height:60px;
+  width:100%;
+  color:#f0f0f0;
+  background-color: #C14848;
+  transition-duration: 0.2s;
+}
+#logOut img {
+  margin-left:27px;
+  margin-right:27px;
+}
+
+#logOut:hover {
+  background-color:#D83439;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+#login {
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items:center;
+  background-color:#66AFDC;
+  color:#f0f0f0;
+}
+
+
+#travelList {
+  position: relative;
+  width:100%;
+  height:100%;
+}
+
+.mainEntry {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin:20px;
+  background-color:#FCFCFC;
+  color:#888;
+  height:80px;
+  border-radius: 2px;
+  font-size:24px;
+  box-shadow: 0 1px 4px rgba(0,0,0, 0.2);
+}
+
+.checkBox {
+  margin-left:24px;
+  margin-right:24px;
+}
+
+.checkBox:hover {
+  cursor: pointer;
+}
+
+.delete {
+  margin-left:auto;
+  margin-right:24px;
+}
+
+.delete:hover {
+  cursor: pointer;
+}
+
+.mainEntry .delete {
+  display:none;
+  transition-duration: 0.3s;
+}
+.mainEntry:hover .delete {
+  display:block;
+  transition-duration: 0.3s;
+}
+
+
+#travelList li img {
+
+}
+
+#travelForm {
+
+  padding-left:27px;
+  display:flex;
+  justify-content: flex-start;
+  position: relative;
+  background-color:#f4f4f4;
+  top:0;
+  height:80px;
+}
+
+#travelForm input {
+  margin-left:27px;
+  width:70%;
+  border:none;
+  font-size:24px;
+  background-color:#f4f4f4;
+}
+
+#travelForm input:focus {
+  outline:none;
+}
+
+#plusBtn {
+  /*align-self: flex-end;*/
+  margin-left: auto;
+  margin-right:27px;
+}
+
+#plusBtn:hover {
+  cursor:pointer;
+  
+}
 

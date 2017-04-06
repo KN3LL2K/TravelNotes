@@ -17,8 +17,7 @@
   },
   "author": "Harry Bellenie",
   "license": "ISC",
-  "bugs": {
-  },
+  "bugs": {},
   "babel": {
     "presets": [
       "react",
@@ -27,15 +26,18 @@
   },
   "homepage": "https://github.com/KN3LL2K/TravelNotes#readme",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "express-session": "^1.15.2",
     "gsap": "^1.19.1",
     "jquery": "^3.1.1",
     "lodash": "^4.17.4",
     "react": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
+    "react-autocomplete": "^1.4.2",
     "react-dom": "^15.4.2",
+    "react-router": "^4.0.0",
     "superagent": "^3.5.0",
-    "body-parser": "^1.17.1",
     "webpack": "^2.2.1"
   },
   "devDependencies": {
