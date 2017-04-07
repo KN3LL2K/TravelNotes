@@ -1,19 +1,13 @@
-// Nav bar
 import React from 'react';
 import ReactDom from 'react-dom';
-
-
-
 
 
 class Nav extends React.Component {
   constructor(props) {
     super(props);
-  
     this.state = {
       collapse:false
     };
-
   }
 
   collapseSidebar() {
@@ -32,7 +26,5 @@ class Nav extends React.Component {
       )
   }
 }
-
-
 
 export default Nav;

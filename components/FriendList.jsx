@@ -1,4 +1,3 @@
-// Friends List
 import React from 'react';
 import ReactDom from 'react-dom';
 
@@ -32,21 +31,18 @@ const Check = () => {
 class FriendList extends React.Component {
   constructor(props) {
     super(props);
-  
     this.state = {
     };
-
   }
-
-  componentDidMount() {
-
-  }
-
 
   render() {
     return(
       <div id='friendList'>
-        <div id='friendListHeader'><img src='assets/friends2.svg' /> Friends <img className='close' onClick={() => this.props.toggleFriendsList()} src='assets/close.svg' /></div>
+        <div id='friendListHeader'>
+          <img src='assets/friends2.svg' /> 
+          Friends 
+          <img className='close' onClick={() => this.props.toggleFriendsList()} src='assets/close.svg' />
+        </div>
         <div id='friendListBody'>
           <List
             items={this.props.data}
@@ -56,7 +52,5 @@ class FriendList extends React.Component {
       )
   }
 }
-
-
 
 export default FriendList;

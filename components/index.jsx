@@ -3,8 +3,6 @@ import ReactDom from 'react-dom';
 import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import App from './App.jsx';
 import request from 'superagent';
-// import Login from './Login.jsx';
-
 
 const checkAuth = function() {
   if (sessionStorage.getItem('id')) {
@@ -13,8 +11,6 @@ const checkAuth = function() {
     return false;
   }
 }
-
-
 
 const routes = () => (
   <Router>
@@ -30,15 +26,10 @@ const routes = () => (
 class Login extends React.Component {
   constructor(props) {
     super(props);
-  
     this.state = {
       name: undefined,
       failedLogin: false
     };
-  }
-
-  componentDidMount() {
-    console.log(this.props)
   }
 
   submitHandler(e) {
@@ -52,20 +43,17 @@ class Login extends React.Component {
   }
 
   login(user) {
-    if (user.toLowerCase() === 'andy' || user.toLowerCase() === 'amos' || user.toLowerCase() === 'evie' ) {
-
+    // very basic user login error handling
+    if (user && (user.toLowerCase() === 'andy' || user.toLowerCase() === 'amos' || user.toLowerCase() === 'evie')) {
     request
       .post('/auth')
       .query({name: user})
       .then(function(res) {
         sessionStorage.setItem('token', res.body.token);
         sessionStorage.setItem('id', res.body.id);
-        console.log('authed', this.props);
-
         this.props.history.push('/');
       }.bind(this))
     } else {
-      console.log('failed user')
       this.setState({failedLogin: !this.state.failedLogin})
     }
   }
@@ -75,6 +63,8 @@ class Login extends React.Component {
     return (
       <div id='login'>
       <h1>Travel Notes <img src='assets/plane.svg' /></h1>
+      <h2>Welcome!</h2>
+      <br />
         <form>
           <input placeholder='Enter your name...' type="text" name="name" onChange={(e) => this.handleChange(e)} />
           <br /><br />
@@ -85,7 +75,6 @@ class Login extends React.Component {
       )
   }
 }
-
 
 ReactDom.render(
   (
