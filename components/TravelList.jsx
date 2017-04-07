@@ -33,10 +33,10 @@ const TravelItem = ({dest, remove, update}) => {
 }
 
 const List = ({items, remove, update}) => {
-  const travelNode = items.map((dest, index) => {
-    return (<TravelItem dest={dest} key={index} remove={remove} update={update} />)
-  });
-  return (<ul>{travelNode}</ul>);
+    const travelNode = items.map((dest, index) => {
+      return (<TravelItem dest={dest} key={index} remove={remove} update={update} />)
+    });
+    return (<ul>{travelNode}</ul>);
 }
 
 class TravelList extends React.Component {
@@ -50,15 +50,22 @@ class TravelList extends React.Component {
 
   render() {
     let isLoading = this.props.loading;
+    let isEmpty = () => {
+      if (this.props.data.destinations && this.props.data.destinations.length) {
+        return false
+      } else {
+        return true
+      }
+    }
     return(
       <div id='travelList'>
         <TravelForm addDest={this.props.addDest.bind(this)} />
         <div>
-          { isLoading ? <Loading /> : <List 
+          { isLoading ? <div className='loading'><Loading /></div> : (isEmpty() ? (<div className='quote'><span >'Somewhere, something incredible is waiting to be discovered.' Carl Sagan.</span></div>)  : <List 
             items={this.props.data.destinations}
             remove={this.props.remove}
             update={this.props.update}
-            />}
+            />)}
         </div>
       </div>
       )

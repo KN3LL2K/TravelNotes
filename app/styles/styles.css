@@ -87,13 +87,14 @@ ul {
   margin:0;
   display:flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items:center;
   flex-grow:0;
   background-color: #666;
   height:100vh;
   left:0;
   top:0;
+  z-index:1;
 }
 
 .-show {
@@ -131,12 +132,44 @@ ul {
   justify-content: flex-end;
   align-items:center;
 }
+
+#title:hover {
+  cursor: pointer;
+}
+
 #title img {
   margin-left:10px;
   margin-right:27px;
 }
 
+#showFriends {
+  font-size:20px;
+  width:100%;
+  height:80px;
+  display:flex;
+  justify-content: flex-end;
+  align-items: center;
+  transition-duration: 0.2s;
+  z-index:10;
+}
+
+#showFriends:hover {
+  background-color:rgba(200, 200, 200, 0.2);
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+.-active {
+  background-color:rgba(200, 200, 200, 0.2);
+}
+
+#showFriends img {
+  margin-left:10px;
+  margin-right:27px;
+}
+
 #logOut {
+  margin-top:auto;
   font-size: 20px;
   padding:0;
   display: flex;
@@ -149,6 +182,7 @@ ul {
   background-color: #C14848;
   transition-duration: 0.2s;
 }
+
 #logOut img {
   margin-left:27px;
   margin-right:27px;
@@ -174,6 +208,38 @@ ul {
   color:#f0f0f0;
 }
 
+#login h1 {
+  font-size:48px;
+}
+
+#login input {
+  padding:5px;
+  width:200px;
+  height:40px;
+  font-size:20px;
+  border-radius: 2px;
+  border:none;
+  background-color: #f0f0f0;
+}
+
+#login input:focus {
+  outline:none;
+}
+
+#login img {
+  height:42px;
+}
+
+#login .-btn {
+  background-color: #bbb;
+  transition-duration: 0.3s;
+}
+
+#login .-btn:hover {
+  cursor: pointer;
+  background-color: #ccc;
+  transition-duration: 0.3s;
+}
 
 #travelList {
   position: relative;
@@ -227,7 +293,6 @@ ul {
 }
 
 #travelForm {
-
   padding-left:27px;
   display:flex;
   justify-content: flex-start;
@@ -257,6 +322,87 @@ ul {
 
 #plusBtn:hover {
   cursor:pointer;
-  
 }
 
+#friendList {
+  background-color:#E5EBEE;
+  min-width:500px;
+  height:100vh;
+  transition-duration: 0.3s;
+  overflow-y:hidden;
+}
+
+#friendListBody {
+  height:calc(100% - 80px);
+  position: relative;
+  overflow-y:auto;
+}
+
+#friendListHeader {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size:24px;
+  color:#AAAAAA;
+  background-color:#D4E3EC;
+  height:80px;
+  /*overflow: hidden;*/
+}
+
+#friendListHeader img {
+  margin-right:27px;
+  margin-left:27px;
+}
+
+.close:hover {
+  cursor: pointer;
+}
+
+.namebadge {
+  height:100%;
+  width:100px;
+  background-color:#F4F4F4;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding-left:24px;
+  padding-right:24px;
+  margin-right:24px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.visitedbadge {
+  margin-left:auto;
+  margin-right:24px;
+}
+
+.loading {
+  width:100%;
+  height:calc(100vh - 80px);
+  position: relative;
+}
+
+.loginError {
+  /*color:#f0f0f0;*/
+  height:24px;
+  margin-top:10px;
+  color: #C14848;
+}
+
+.quote {
+  width:100%;
+  height: calc(100vh - 80px);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: serif;
+  font-style: italic;
+  font-size:18px;
+  color:#aaa;
+}
+
+.quote span {
+  text-align:center;
+}
