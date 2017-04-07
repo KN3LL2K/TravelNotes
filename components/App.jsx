@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import Nav from './Nav.jsx';
 import Loading from './Loading.jsx';
 import TravelList from './TravelList.jsx';
+import FriendList from './FriendList.jsx';
 import { Redirect } from 'react-router-dom';
 import request from 'superagent';
 
@@ -14,14 +15,13 @@ class App extends React.Component {
       userData: [],
       friendData: [],
       loading: true,
-      showFriends: false,
+      showFriendsList: false,
       collapse: false
     };
   }
 
   componentDidMount() {
     this.getTravelers();
-    
   }
 
   getTravelers() {
@@ -30,7 +30,6 @@ class App extends React.Component {
       .set('Authorization', sessionStorage.token)
       .then(function(res) {
       this.filterTravelData(res.body);
-      console.log(res.body)
     }.bind(this))
   }
 
@@ -45,10 +44,6 @@ class App extends React.Component {
     this.setState({friendData: friendsTrips, userData: userTrips[0], loading: false});
   }
 
-  collapseSidebar() {
-    
-  }
-
   signOut() {
     sessionStorage.clear();
     this.props.history.push('/login');
@@ -57,15 +52,19 @@ class App extends React.Component {
 
   addDest(dest) {
     const item = {name: dest, visited: false};
-    this.state.userData.destinations.push(item);
-    this.setState({data: this.state.userData.destinations});
-    this.updateData(this.state.userData.destinations);
+    let data = this.state.userData.destinations || [];
+    data.push(item);
+    this.setState({userData: {destinations: data}});
+    this.updateData(data);
   }
 
   handleRemove(name){
-    const remainder = this.state.userData.destinations.filter((dest) => {
+    let remainder = this.state.userData.destinations.filter((dest) => {
       if(dest.name !== name) return dest;
     });
+    if (!remainder) {
+      remainder = [];
+    }
     this.setState({userData: {destinations: remainder}});
     this.updateData(remainder);
   }
@@ -90,24 +89,27 @@ class App extends React.Component {
       .send({destinations: data})
       .then(function(res) {
         this.setState({userData: {destinations: res.body.destinations}})
-        console.log(res.body);
       }.bind(this))
+  }
+
+  toggleFriendsList() {
+    this.setState({showFriendsList: !this.state.showFriendsList})
   }
  
   render() {
-    let showFriends = this.state.showFriends;
-    // {showFriends ? : <FriendsList />}
+    let showFriends = this.state.showFriendsList;
+    let data = this.state.userData || {};
     return(
       <div id='home'>
-      <Nav signOut={this.signOut.bind(this)}/>
+      <Nav toggleFriendsList={this.toggleFriendsList.bind(this)} showFriends={showFriends} signOut={this.signOut.bind(this)}/>
       <TravelList 
         loading={this.state.loading} 
-        data={this.state.userData} 
+        data={data} 
         addDest={this.addDest.bind(this)}
         remove={this.handleRemove.bind(this)}
         update={this.changeVisited.bind(this)}
       />
-
+      {showFriends ? <FriendList data={this.state.friendData} toggleFriendsList={this.toggleFriendsList.bind(this)} /> : ''}
       </div>
       )
   }

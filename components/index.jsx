@@ -32,7 +32,8 @@ class Login extends React.Component {
     super(props);
   
     this.state = {
-      name: undefined
+      name: undefined,
+      failedLogin: false
     };
   }
 
@@ -51,6 +52,8 @@ class Login extends React.Component {
   }
 
   login(user) {
+    if (user.toLowerCase() === 'andy' || user.toLowerCase() === 'amos' || user.toLowerCase() === 'evie' ) {
+
     request
       .post('/auth')
       .query({name: user})
@@ -61,18 +64,23 @@ class Login extends React.Component {
 
         this.props.history.push('/');
       }.bind(this))
+    } else {
+      console.log('failed user')
+      this.setState({failedLogin: !this.state.failedLogin})
+    }
   }
 
   render() {
-
+    let failedLogin = this.state.failedLogin;
     return (
       <div id='login'>
       <h1>Travel Notes <img src='assets/plane.svg' /></h1>
         <form>
           <input placeholder='Enter your name...' type="text" name="name" onChange={(e) => this.handleChange(e)} />
           <br /><br />
-          <input type="submit" value="Submit" onClick={(e) => this.submitHandler(e)}/>
+          <input className='-btn' type="submit" value="Sign In" onClick={(e) => this.submitHandler(e)}/>
         </form>
+        <div className='loginError'>{failedLogin ? 'Please enter a valid user name.' : ''}</div>
       </div>
       )
   }
