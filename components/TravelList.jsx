@@ -8,13 +8,15 @@ const TravelForm = ({addDest}) => {
   return (
     <div id='travelForm'>
     <img src='assets/earth.svg' />
-      <input placeholder='Where do you want to go?' ref={node => {
-        input = node;
-      }} />
-      <img id='plusBtn' src='assets/plus.svg' onClick={() => {
-        addDest(input.value);
-        input.value = '';
-      }} />
+      <form>
+        <input placeholder='Where do you want to go?' ref={node => {
+          input = node;
+        }} />
+        <button type='submit' onClick={(e) => {
+          addDest(e, input.value);
+          input.value = '';
+        }}><img id='plusBtn' src='assets/plus.svg'  /></button>
+      </form>
     </div>
     );
 };
@@ -39,13 +41,15 @@ const List = ({items, remove, update}) => {
     return (<ul>{travelNode}</ul>);
 }
 
+const Quote = () => {
+  return (<div className='quote'><span>'Somewhere, something incredible is waiting to be discovered.' Carl Sagan.</span></div>)
+}
+
 class TravelList extends React.Component {
   constructor(props) {
     super(props);
-  
     this.state = {
     };
-
   }
 
   render() {
@@ -61,7 +65,7 @@ class TravelList extends React.Component {
       <div id='travelList'>
         <TravelForm addDest={this.props.addDest.bind(this)} />
         <div>
-          { isLoading ? <div className='loading'><Loading /></div> : (isEmpty() ? (<div className='quote'><span >'Somewhere, something incredible is waiting to be discovered.' Carl Sagan.</span></div>)  : <List 
+          { isLoading ? <div className='loading'><Loading /></div> : (isEmpty() ? <Quote />  : <List 
             items={this.props.data.destinations}
             remove={this.props.remove}
             update={this.props.update}
@@ -71,7 +75,5 @@ class TravelList extends React.Component {
       )
   }
 }
-
-
 
 export default TravelList;

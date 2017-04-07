@@ -9,8 +9,7 @@ import request from 'superagent';
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
-  
+    super(props);  
     this.state = {
       userData: [],
       friendData: [],
@@ -29,11 +28,11 @@ class App extends React.Component {
       .get('/travelers')
       .set('Authorization', sessionStorage.token)
       .then(function(res) {
-      this.filterTravelData(res.body);
+      this.sortTravelData(res.body);
     }.bind(this))
   }
 
-  filterTravelData(data) {
+  sortTravelData(data) {
     const userID = sessionStorage.id;
     const userTrips = data.filter((dest) => {
       if(dest.id === +userID) return dest;
@@ -49,13 +48,15 @@ class App extends React.Component {
     this.props.history.push('/login');
   }
 
-
-  addDest(dest) {
-    const item = {name: dest, visited: false};
-    let data = this.state.userData.destinations || [];
-    data.push(item);
-    this.setState({userData: {destinations: data}});
-    this.updateData(data);
+  addDest(e, dest) {
+    e.preventDefault();
+    if (dest.length > 0) {
+      const item = {name: dest, visited: false};
+      let data = this.state.userData.destinations || [];
+      data.push(item);
+      this.setState({userData: {destinations: data}});
+      this.updateData(data);
+    }
   }
 
   handleRemove(name){
@@ -114,8 +115,5 @@ class App extends React.Component {
       )
   }
 }
-
-
-
 
 export default App;
